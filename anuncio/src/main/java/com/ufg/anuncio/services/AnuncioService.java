@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ufg.anuncio.domain.Anuncio;
+import com.ufg.anuncio.domain.ComplementoAnuncio;
 import com.ufg.anuncio.repository.IAnuncioRepository;
+import com.ufg.anuncio.repository.IComplementoRepository;
 import com.ufg.anuncio.services.exceptions.AnuncioNaoEncontradoException;
 
 @Service
@@ -17,14 +18,17 @@ public class AnuncioService {
 	public static final String AnuncioNaoEncontrado = "O Anúncio não pode ser encontrado!";
 	
 	@Autowired
-	public IAnuncioRepository repository;
+	public IAnuncioRepository anunciosRepository;
+	
+	@Autowired
+	private IComplementoRepository complementoRepository;
 
 	public List<Anuncio> listar(){
-		return repository.findAll();
+		return anunciosRepository.findAll();
 	}
 	
-	public Anuncio buscar(Long id) {
-		Anuncio anuncio = repository.getOne(id);
+	public Anuncio buscarAnuncio(Long id) {
+		Anuncio anuncio = anunciosRepository.getOne(id);
 		
 		if (anuncio == null){
 			throw new AnuncioNaoEncontradoException(AnuncioNaoEncontrado);
@@ -34,7 +38,7 @@ public class AnuncioService {
 	
 	public Anuncio salvar(Anuncio anuncio) {
 		anuncio.setId(null);
-		anuncio = repository.save(anuncio);
+		anuncio = anunciosRepository.save(anuncio);
 		
 		return anuncio;
 	}
@@ -42,16 +46,26 @@ public class AnuncioService {
 	public void deletar(Long id) {
 		
 		try {
-			repository.deleteById(id);			
+			anunciosRepository.deleteById(id);			
 		}catch(EmptyResultDataAccessException e) {
 			throw new AnuncioNaoEncontradoException(AnuncioNaoEncontrado);
 		}
 	}
 	
 	public void atualizar(Anuncio anuncio) {
-		buscar(anuncio.getId());
-		repository.save(anuncio);
+		verificarExistencia(anuncio);
+		anunciosRepository.save(anuncio);
 	}
 	
+	public void verificarExistencia(Anuncio anuncio) {
+		buscarAnuncio(anuncio.getId());
+	}
+	
+	public ComplementoAnuncio salvarComplemento(Long anuncioId, ComplementoAnuncio complemento) {
+		Anuncio anuncio = buscarAnuncio(anuncioId);
+		complemento.setAnuncio(anuncio);
+
+		return complementoRepository.save(complemento);
+	}
 
 }

@@ -1,12 +1,15 @@
 package com.ufg.anuncio.domain;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.NotNull;
 
 
 @Entity
@@ -16,15 +19,18 @@ public class Anuncio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	//@NotNull(message = "O campo título não pode ser vazio.")
 	private String titulo;
 	
+	//@NotNull(message = "O campo local não pode ser vazio.")
 	private String local;
 	
-	private Calendar data;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private Date data;
 	
 	private String descricao;
 	
-	@Transient
+	@OneToOne(mappedBy = "anuncio")
 	private ComplementoAnuncio complemento;
 
 	public Long getId() {
@@ -51,11 +57,11 @@ public class Anuncio {
 		this.local = local;
 	}
 
-	public Calendar getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
@@ -83,14 +89,13 @@ public class Anuncio {
 		this.titulo = titulo;
 		this.local = local;
 		this.descricao = descricao;
-		this.data = Calendar.getInstance();
+		this.data = new Date();
 	}
 	
-	public Anuncio( String titulo, String local, String descricao, Calendar data ) {
+	public Anuncio( String titulo, String local, String descricao, Date data ) {
 		this.titulo = titulo;
 		this.local = local;
 		this.descricao = descricao;
 		this.data = data;
-	}
-	
+	}			
 }
