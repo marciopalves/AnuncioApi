@@ -6,7 +6,10 @@
 		"22860245-2340-4b4c-df56-50ed4f6f465a",
 		"8d4e2716-516c-a941-40d7-47fdb8b32080",
 		"d8f63c83-a72e-3cda-8b51-995509c62219",
-		"dd341c1d-6dd0-735b-fd70-c3ef78a6c263"
+		"6220c93f-982d-1701-ea14-47df131b7a0e",
+		"8568a190-c728-8422-c84c-24f7fe1307bd",
+		"1f3a317a-abd4-d95d-dacb-86ebe2c46e2b",
+		"a2497b79-f9d2-217c-66fc-7552a1206cbe"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -14,6 +17,37 @@
 	"owner": "2204184",
 	"public": false,
 	"requests": [
+		{
+			"id": "1f3a317a-abd4-d95d-dacb-86ebe2c46e2b",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/anuncios/titulo?titulo=Ruby",
+			"queryParams": [
+				{
+					"key": "titulo",
+					"value": "Ruby",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
+			"data": null,
+			"dataMode": "params",
+			"name": "http://localhost:8080/anuncios/titulo",
+			"description": "Método para buscar o Anuncio pelo a partir do titulo.",
+			"descriptionFormat": "html",
+			"time": 1605697008668,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
 		{
 			"id": "22860245-2340-4b4c-df56-50ed4f6f465a",
 			"headers": "",
@@ -34,6 +68,68 @@
 			"description": "Retorna todos os aúuncios da Api.",
 			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
 			"responses": []
+		},
+		{
+			"id": "6220c93f-982d-1701-ea14-47df131b7a0e",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/anuncios",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/anuncios/1",
+			"description": "Busca Anúncio por id",
+			"descriptionFormat": "html",
+			"time": 1605610507481,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"nome\":\"João Canabrava\",\n\t\"cpf\":\"11111111111\",\n\t\"email\":\"joaobirita@bol.com\",\n\t\"telefone\":\"41 812345489\"\n\t\n}"
+		},
+		{
+			"id": "8568a190-c728-8422-c84c-24f7fe1307bd",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/anuncios/1",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "PUT",
+			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:8080/anuncios/1",
+			"description": "Método para Alterar um anúncio em específico.",
+			"descriptionFormat": "html",
+			"time": 1605610587542,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n        \"id\": 1,\n        \"titulo\": \"Progrmador Ruby on Rails\",\n        \"local\": \"Goiânia\",\n        \"data\": \"01/11/2020\",\n        \"descricao\": \"Experiências Com Microserviços, Kubernetes, React\"\n    }"
 		},
 		{
 			"id": "8d4e2716-516c-a941-40d7-47fdb8b32080",
@@ -65,6 +161,37 @@
 			"rawModeData": "{\n\t\"titulo\":\"Progrmador Ruby\",\n\t\"local\":\"Goiânia\",\n\t\"descricao\":\"Experiências Com Microserviços, Kubernetes, React\"\n}"
 		},
 		{
+			"id": "a2497b79-f9d2-217c-66fc-7552a1206cbe",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/anuncios/local?local=Goiânia",
+			"queryParams": [
+				{
+					"key": "local",
+					"value": "Goiânia",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
+			"data": null,
+			"dataMode": "params",
+			"name": "http://localhost:8080/anuncios/local?local=Goiânia",
+			"description": "Método para buscar Anúncio a partir do local.",
+			"descriptionFormat": "html",
+			"time": 1605697151823,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
 			"id": "d8f63c83-a72e-3cda-8b51-995509c62219",
 			"headers": "",
 			"headerData": [],
@@ -81,29 +208,6 @@
 			"description": "Método para deletar Anuncio",
 			"descriptionFormat": "html",
 			"time": 1604400025210,
-			"version": 2,
-			"responses": [],
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {}
-		},
-		{
-			"id": "dd341c1d-6dd0-735b-fd70-c3ef78a6c263",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/anuncios/1",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"preRequestScript": null,
-			"method": "GET",
-			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
-			"data": null,
-			"dataMode": "params",
-			"name": "http://localhost:8080/anuncios/1",
-			"description": "Método para buscar o Anuncio pelo id.",
-			"descriptionFormat": "html",
-			"time": 1604400141591,
 			"version": 2,
 			"responses": [],
 			"tests": null,
