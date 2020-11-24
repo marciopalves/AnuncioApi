@@ -1,5 +1,6 @@
 package com.ufg.anuncio.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,7 +11,6 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 
 
 @Entity
@@ -33,7 +33,7 @@ public class Anuncio {
 	
 	@JsonIgnore
 	@OneToOne(mappedBy = "anuncio")
-	private ComplementoAnuncio complemento;
+	private ComplementoAnuncio complemento; 
 
 	public Long getId() {
 		return id;
@@ -136,6 +136,14 @@ public class Anuncio {
 		} else if (!titulo.equals(other.titulo))
 			return false;
 		return true;
+	}
+
+	public String toString() {		
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+		
+		return "id:"+this.id +
+			   " titulo:"+this.titulo+
+			   " data:"+f.format(this.data);
 	}
 	
 }

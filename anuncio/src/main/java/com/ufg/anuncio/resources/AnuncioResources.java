@@ -2,8 +2,11 @@ package com.ufg.anuncio.resources;
 
 import 	java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ufg.anuncio.domain.Anuncio;
+import com.ufg.anuncio.domain.AnuncioResponseDto;
 import com.ufg.anuncio.domain.ComplementoAnuncio;
 import com.ufg.anuncio.services.AnuncioService;
 
@@ -26,8 +30,8 @@ public class AnuncioResources {
 	public AnuncioService  anuncioService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Anuncio>> listar() {
-		return ResponseEntity.status(HttpStatus.OK).body(anuncioService.listar());
+	public String buscarTodos(Pageable pageable) {
+		return anuncioService.buscarTodos(pageable);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -41,7 +45,7 @@ public class AnuncioResources {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> buscar(@PathVariable("id") Long id) {
 		
-		Anuncio anuncio = anuncioService.buscarAnuncio(id);
+		Optional<Anuncio> anuncio = anuncioService.buscarAnuncio(id);
 		return ResponseEntity.ok(anuncio);	
 	}
 	
@@ -59,25 +63,20 @@ public class AnuncioResources {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(value = "{id}/complementos", method = RequestMethod.POST)
-	public ResponseEntity<Void> adcionarComplemento(@PathVariable("id") Long anuncioId, 
-				@RequestBody ComplementoAnuncio complemento) {
-		
-		anuncioService.salvarComplemento(anuncioId, complemento);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
-		
-		return ResponseEntity.created(uri).build();
-		
-	}
+//	@RequestMapping(value = "{id}/complementos", method = RequestMethod.POST)
+//	public ResponseEntity<Void> adcionarComplemento(@PathVariable("id") Long anuncioId, 
+//				@RequestBody ComplementoAnuncio complemento) {
+//		
+//		anuncioService.salvarComplemento(anuncioId, complemento);
+//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+//		
+//		return ResponseEntity.created(uri).build();
+//		
+//	}
 	
-	@RequestMapping(value = "/titulo", method = RequestMethod.GET)
-	public ResponseEntity<List<Anuncio>> BuscarPorTitulo(@RequestParam("titulo") String titulo) {				
-		return ResponseEntity.status(HttpStatus.OK).body(anuncioService.BuscarPorTitulo(titulo));
-	}
-	
-	@RequestMapping(value = "/local", method = RequestMethod.GET)
-	public ResponseEntity<List<Anuncio>> BuscarPorLocal(@RequestParam("local") String local) {				
-		return ResponseEntity.status(HttpStatus.OK).body(anuncioService.BuscarPorLocal(local));
+	@RequestMapping(value = "/filtros", method = RequestMethod.GET)
+	public String buscaComFiltros(AnuncioResponseDto dto, Pageable pageable) {				
+		return anuncioService.buscaComFiltros(dto, pageable);
 	}
 	
 }

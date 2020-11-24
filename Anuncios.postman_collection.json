@@ -21,7 +21,7 @@
 			"id": "1f3a317a-abd4-d95d-dacb-86ebe2c46e2b",
 			"headers": "",
 			"headerData": [],
-			"url": "http://localhost:8080/anuncios/titulo?titulo=Ruby",
+			"url": "http://localhost:8080/anuncios/filtros/?titulo=Ruby&page=0&size=10",
 			"queryParams": [
 				{
 					"key": "titulo",
@@ -29,31 +29,59 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "size",
+					"value": "10",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
 			"data": null,
 			"dataMode": "params",
-			"name": "http://localhost:8080/anuncios/titulo",
-			"description": "Método para buscar o Anuncio pelo a partir do titulo.",
-			"descriptionFormat": "html",
-			"time": 1605697008668,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {}
+			"helperAttributes": {},
+			"time": 1606218692760,
+			"name": "http://localhost:8080/anuncios/filtros",
+			"description": "Buscar o Anúncio a partir do titulo.",
+			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
+			"responses": []
 		},
 		{
 			"id": "22860245-2340-4b4c-df56-50ed4f6f465a",
 			"headers": "",
 			"headerData": [],
-			"url": "http://localhost:8080/anuncios",
-			"queryParams": [],
+			"url": "http://localhost:8080/anuncios?page=0&size=10",
+			"queryParams": [
+				{
+					"key": "page",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "size",
+					"value": "10",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
 			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
@@ -63,7 +91,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1604053815533,
+			"time": 1606220545851,
 			"name": "http://localhost:8080/anuncios",
 			"description": "Retorna todos os aúuncios da Api.",
 			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
@@ -80,24 +108,23 @@
 					"enabled": true
 				}
 			],
-			"url": "http://localhost:8080/anuncios",
+			"url": "http://localhost:8080/anuncios/2",
 			"queryParams": [],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
 			"data": [],
 			"dataMode": "raw",
-			"name": "http://localhost:8080/anuncios/1",
-			"description": "Busca Anúncio por id",
-			"descriptionFormat": "html",
-			"time": 1605610507481,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
+			"time": 1606219123958,
+			"name": "http://localhost:8080/anuncios/1",
+			"description": "Busca Anúncio por id",
+			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
+			"responses": [],
 			"rawModeData": "{\n\t\"nome\":\"João Canabrava\",\n\t\"cpf\":\"11111111111\",\n\t\"email\":\"joaobirita@bol.com\",\n\t\"telefone\":\"41 812345489\"\n\t\n}"
 		},
 		{
@@ -153,18 +180,18 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1604056230115,
+			"time": 1606219853131,
 			"name": "http://localhost:8080/anuncios",
 			"description": "Método para criar um novo anúncio.",
 			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
 			"responses": [],
-			"rawModeData": "{\n\t\"titulo\":\"Progrmador Ruby\",\n\t\"local\":\"Goiânia\",\n\t\"descricao\":\"Experiências Com Microserviços, Kubernetes, React\"\n}"
+			"rawModeData": "{\n        \"id\": 1,\n        \"titulo\": \"Progrmador Ruby\",\n        \"local\": \"Goiânia\",\n        \"data\": \"01/11/2020\",\n        \"descricao\": \"Experiências Com Microserviços, Kubernetes, React\"\n    }"
 		},
 		{
 			"id": "a2497b79-f9d2-217c-66fc-7552a1206cbe",
 			"headers": "",
 			"headerData": [],
-			"url": "http://localhost:8080/anuncios/local?local=Goiânia",
+			"url": "http://localhost:8080/anuncios/filtros/?local=Goiânia&page=0&size=10",
 			"queryParams": [
 				{
 					"key": "local",
@@ -172,24 +199,36 @@
 					"equals": true,
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "0",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "size",
+					"value": "10",
+					"equals": true,
+					"description": "",
+					"enabled": true
 				}
 			],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
 			"data": null,
 			"dataMode": "params",
-			"name": "http://localhost:8080/anuncios/local?local=Goiânia",
-			"description": "Método para buscar Anúncio a partir do local.",
-			"descriptionFormat": "html",
-			"time": 1605697151823,
-			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {}
+			"helperAttributes": {},
+			"time": 1606219901375,
+			"name": "http://localhost:8080/anuncios/filtros",
+			"description": "Método para buscar Anúncio a partir do local.",
+			"collectionId": "11ce8d69-f368-491e-88f9-b86cf71c9b42",
+			"responses": []
 		},
 		{
 			"id": "d8f63c83-a72e-3cda-8b51-995509c62219",

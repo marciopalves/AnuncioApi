@@ -1,14 +1,17 @@
 package com.ufg.anuncio.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
 import com.ufg.anuncio.domain.Anuncio;
-import com.ufg.anuncio.domain.ComplementoAnuncio;
+import com.ufg.anuncio.domain.AnuncioResponseDto;
 import com.ufg.anuncio.repository.IAnuncioRepository;
 import com.ufg.anuncio.repository.IComplementoRepository;
 import com.ufg.anuncio.services.exceptions.AnuncioNaoEncontradoException;
@@ -24,12 +27,13 @@ public class AnuncioService {
 	@Autowired
 	private IComplementoRepository complementoRepository;
 
-	public List<Anuncio> listar(){
-		return anunciosRepository.findAll();
+	public String buscarTodos(@PageableDefault Pageable pageable) {
+		Page<Anuncio> page = anunciosRepository.findAll(pageable);		
+		return page.getContent().toString().toString();
 	}
 	
-	public Anuncio buscarAnuncio(Long id) {
-		Anuncio anuncio = anunciosRepository.getOne(id);
+	public Optional<Anuncio> buscarAnuncio(Long id) {
+		Optional<Anuncio> anuncio = anunciosRepository.findById(id);
 		
 		if (anuncio == null){
 			throw new AnuncioNaoEncontradoException(AnuncioNaoEncontrado);
@@ -62,18 +66,19 @@ public class AnuncioService {
 		buscarAnuncio(anuncio.getId());
 	}
 	
-	public ComplementoAnuncio salvarComplemento(Long anuncioId, ComplementoAnuncio complemento) {
-		Anuncio anuncio = buscarAnuncio(anuncioId);
-		complemento.setAnuncio(anuncio);
-
-		return complementoRepository.save(complemento);
-	}
+//	public ComplementoAnuncio salvarComplemento(Long anuncioId, ComplementoAnuncio complemento) {
+//		Optional<Anuncio> anuncio = buscarAnuncio(anuncioId);
+//		complemento.setAnuncio(anuncio);
+//
+//		return complementoRepository.save(complemento);
+//	}
 	
-	public List<Anuncio> BuscarPorTitulo(String titulo){
+	public List<Anuncio> buscarPorTitulo(String titulo){
 		return anunciosRepository.findByTitle(titulo);
 	}
 	
-	public List<Anuncio> BuscarPorLocal(String local){
-		return anunciosRepository.findByLocal(local);
-	}
+	public String buscaComFiltros(AnuncioResponseDto dto, Pageable pageable) {
+		return anunciosRepository.findAll(dto.toSpec(), pageable).getContent().toString();		
+	}	
+		
 }
