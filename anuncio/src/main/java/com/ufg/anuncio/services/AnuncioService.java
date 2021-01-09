@@ -3,18 +3,20 @@ package com.ufg.anuncio.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.ufg.anuncio.domain.Anuncio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.ufg.anuncio.domain.Anuncio;
 import com.ufg.anuncio.domain.AnuncioResponseDto;
 import com.ufg.anuncio.repository.IAnuncioRepository;
 import com.ufg.anuncio.repository.IComplementoRepository;
 import com.ufg.anuncio.services.exceptions.AnuncioNaoEncontradoException;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AnuncioService {
@@ -27,17 +29,13 @@ public class AnuncioService {
 	@Autowired
 	private IComplementoRepository complementoRepository;
 
-	public String buscarTodos(@PageableDefault Pageable pageable) {
-		Page<Anuncio> page = anunciosRepository.findAll(pageable);		
-		return page.getContent().toString().toString();
+	public Page<Anuncio> buscarTodos(@PageableDefault Pageable pageable) {
+		return anunciosRepository.findAll(pageable);
 	}
 	
 	public Optional<Anuncio> buscarAnuncio(Long id) {
 		Optional<Anuncio> anuncio = anunciosRepository.findById(id);
-		
-		if (anuncio == null){
-			throw new AnuncioNaoEncontradoException(AnuncioNaoEncontrado);
-		}
+		anuncio.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "item not found"));
 		return anuncio;
 	}
 	
